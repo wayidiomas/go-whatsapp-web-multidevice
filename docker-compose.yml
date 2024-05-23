@@ -10,6 +10,13 @@ services:
     build:
       context: .
       dockerfile: ./docker/golang.Dockerfile
-    restart: 'always'
+    restart: always
     ports:
       - "3000:3000"
+    environment:
+      - PORT=3000
+      - DEBUG=true
+      - WEBHOOK_URL=http://yourwebhook.site/handler
+    command: >
+      ./app/whatsapp
+      --webhook=${WEBHOOK_URL}
